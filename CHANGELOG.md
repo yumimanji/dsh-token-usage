@@ -11,6 +11,9 @@ This changelog records verifiable changes represented in the repository history.
 - 补齐 npm 元数据：`license`、`author` / `contributors`（保留原作者署名）、指向本 fork 的 `repository` / `bugs` / `homepage`，并把 `CHANGELOG.md` 与 `LICENSE` 纳入发布 tarball。
 - 内部标识**有意保持不变**：`tsdown.config.ts` 的 `PLUGIN_ID`、插件实例 `id`、RPC/schema 字符串（如 `dsh-token-usage/workbench-v2`）、`localStorage` 键与 DOM 事件名仍为 `dsh-token-usage`。它们不是 npm 包名，改动会破坏已持久化数据与 Host↔Client 协议；因此 `lib/` 产物无需重建，CSS Module 哈希也不变。
 
+- 放宽 peer 范围以支持运行中的 DSH `0.2.0-rc.2`：原 `^0.1.2-rc.1` 被 semver 展开为 `>=0.1.2-rc.1 <0.2.0-0`，其上界 `-0` 恰好排除 `0.2.0-rc.2`（因为 `0.2.0-rc.2 > 0.2.0-0`），使 `@deepseek-ai/dsh-app-boot` 的 `evaluatePluginCompatibility()` 以 `incompatible-version` 拒绝加载全部 21 个 dsh peer。现改为 `^0.1.2-rc.1 || ^0.2.0-rc.2`，并把 `dsh.compatibility.dsh` 同步为 `>=0.1.2-rc.1 <0.3.0`（该字段仅作说明，DSH 不读取，真正卡加载的是 `peerDependencies`）。
+- 0.2.0-rc.2 仅完成**静态表面核验**：8 个 `dsh.client.inject` 服务与 4 个运行时 value import 符号（`SessionId`、`isReplacementSurfaceEvent`、`BlockAssembler`、`createUserMessage`）在 0.2.0-rc.2 中均存在且被导出。**未**做端到端实测，因此 `dshReleases["0.2.0-rc.2"]` 如实标为 `surface-checked` 而非 `compatible`；详见 [docs/compatibility-0.2.0-rc.2.md](docs/compatibility-0.2.0-rc.2.md)。
+
 ### Upstream（沿用上游未发布改动）
 
 - Keep client bundles and embedded source maps identical when the pinned Harness lives in a sibling checkout or an externally linked CI directory. Use Rolldown's whitespace-only AST printer with legal comments retained; normalize only dependency source-map labels, without rewriting generated JavaScript text.

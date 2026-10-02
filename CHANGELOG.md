@@ -4,6 +4,15 @@ This changelog records verifiable changes represented in the repository history.
 
 ## [Unreleased]
 
+### Fork（个人二开）
+
+- 本仓库是 [LeemanCheung/dsh-token-usage](https://github.com/LeemanCheung/dsh-token-usage)（MIT）的**个人 fork**，不是上游仓库，也未获得原作者背书；上游问题请提到上游，本二开改动请提到本仓库。
+- npm 包名改为 `@hello_wk/dsh-token-usage`，并将 `cordis.patch.yml` 的模块 `name` 同步为该名（DSH 按模块标识符从 profile 的 `node_modules` 解析，必须与 `package.json` 的 `name` 完全一致）；以 `publishConfig.access = "public"` 公开发布，因此移除了 `private: true`。
+- 补齐 npm 元数据：`license`、`author` / `contributors`（保留原作者署名）、指向本 fork 的 `repository` / `bugs` / `homepage`，并把 `CHANGELOG.md` 与 `LICENSE` 纳入发布 tarball。
+- 内部标识**有意保持不变**：`tsdown.config.ts` 的 `PLUGIN_ID`、插件实例 `id`、RPC/schema 字符串（如 `dsh-token-usage/workbench-v2`）、`localStorage` 键与 DOM 事件名仍为 `dsh-token-usage`。它们不是 npm 包名，改动会破坏已持久化数据与 Host↔Client 协议；因此 `lib/` 产物无需重建，CSS Module 哈希也不变。
+
+### Upstream（沿用上游未发布改动）
+
 - Keep client bundles and embedded source maps identical when the pinned Harness lives in a sibling checkout or an externally linked CI directory. Use Rolldown's whitespace-only AST printer with legal comments retained; normalize only dependency source-map labels, without rewriting generated JavaScript text.
 - Reattribute identical final usage to its authoritative UTC day and replay older projection checkpoints without changing total usage or request counts.
 - Keep unattributed fallback identities out of exact-route trend and budget controls; retain existing fallback budgets as removable, unavailable entries.

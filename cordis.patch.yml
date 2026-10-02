@@ -1,4 +1,8 @@
 # Persistent Host projection plus its Web settings dashboard.
+# NOTE (personal fork): `name` is the module specifier DSH resolves from the
+# profile's node_modules, so it must match package.json `name` exactly —
+# this fork publishes as @hello_wk/dsh-token-usage, not the upstream repo name.
+# `id` stays `token-usage` on purpose: it is the internal plugin instance id.
 - insert:
     - id: token-usage
-      name: 'dsh-token-usage'
+      name: '@hello_wk/dsh-token-usage'

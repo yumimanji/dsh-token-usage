@@ -1,8 +1,12 @@
 {
-  "name": "dsh-token-usage",
+  "name": "@hello_wk/dsh-token-usage",
   "version": "0.5.0",
-  "private": true,
-  "description": "Persistent token usage records and dashboard for DeepSeek Harness",
+  "description": "Personal fork of LeemanCheung/dsh-token-usage: persistent token usage records and dashboard for DeepSeek Harness",
+  "license": "MIT",
+  "author": "yumimanji",
+  "contributors": [
+    "LeemanCheung (original upstream author)"
+  ],
   "keywords": [
     "dsh",
     "deepseek-harness",
@@ -11,12 +15,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/LeemanCheung/dsh-token-usage.git"
+    "url": "git+https://github.com/yumimanji/dsh-token-usage.git"
   },
   "bugs": {
-    "url": "https://github.com/LeemanCheung/dsh-token-usage/issues"
+    "url": "https://github.com/yumimanji/dsh-token-usage/issues"
   },
-  "homepage": "https://github.com/LeemanCheung/dsh-token-usage#readme",
+  "homepage": "https://github.com/yumimanji/dsh-token-usage#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "type": "module",
   "main": "lib/index.js",
   "types": "src/index.ts",
@@ -38,6 +46,8 @@
     "src",
     "cordis.patch.yml",
     "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
     "docs/workbench.md",
     "docs/workbench-acceptance.md"
   ],

@@ -1,5 +1,17 @@
 # dsh-token-usage
 
+> [!IMPORTANT]
+> **本仓库是个人二开（fork）仓库，不是原作者仓库，也不是官方发布。**
+>
+> 本仓库由 [@yumimanji](https://github.com/yumimanji) 从上游 [LeemanCheung/dsh-token-usage](https://github.com/LeemanCheung/dsh-token-usage) fork 而来，仅用于个人的二次开发与实验，并以 `@hello_wk/dsh-token-usage` 发布到 npm。**请勿将本仓库的功能、缺陷或发布版本归因于原作者。**
+>
+> - 上游作者：**LeemanCheung**；原始项目与原始文档以上游仓库为准。
+> - 上游的问题与建议请提到[上游 Issues](https://github.com/LeemanCheung/dsh-token-usage/issues)；本二开引入的改动与问题请提到[本仓库 Issues](https://github.com/yumimanji/dsh-token-usage/issues)。
+> - 本项目沿用上游的 [MIT](LICENSE) 许可证，原始版权归 LeemanCheung 所有，详见 [License](#-license)。
+> - 与上游的差异记录在 [CHANGELOG.md](CHANGELOG.md) 与下文的「二开说明」。
+>
+> **This is a personal fork, not the original author's repository.** Forked from [LeemanCheung/dsh-token-usage](https://github.com/LeemanCheung/dsh-token-usage) by [@yumimanji](https://github.com/yumimanji) for personal secondary development, and published to npm as `@hello_wk/dsh-token-usage`. The upstream repository is authoritative for the original project; the MIT license and the original copyright (LeemanCheung) are retained.
+
 <p align="center">
   <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Awesome"></a>
   <a href="https://awesome-dsh-plugin.com"><img src="https://awesome-dsh-plugin.com/badge.svg" alt="Awesome DSH Plugin"></a>
@@ -17,6 +29,7 @@
 </p>
 
 <p align="center">
+  <a href="#二开说明">二开说明</a> ·
   <a href="#功能全景">功能全景</a> ·
   <a href="#功能截图">功能截图</a> ·
   <a href="#安装">安装</a> ·
@@ -98,8 +111,14 @@
 ## 🚀 安装
 
 ```powershell
-dsh plugin --profile web add github:LeemanCheung/dsh-token-usage
+# 方式一：本二开仓库源码安装（当前可用）
+dsh plugin --profile web add github:yumimanji/dsh-token-usage
+
+# 方式二：npm 安装（本二开版本发布后可用）
+dsh plugin --profile web add @hello_wk/dsh-token-usage
 ```
+
+> 上游原版安装命令为 `dsh plugin --profile web add github:LeemanCheung/dsh-token-usage`。本二开与上游是**不同来源、不同包名**，请按需选择；不要混用两者的包名或 Issue 地址。
 
 安装后重启当前 `dsh web` 进程并刷新 [http://127.0.0.1:3080](http://127.0.0.1:3080)，再打开 **设置 → Token 用量**；新增功能位于 **设置 → 用量工作台**。
 
@@ -122,8 +141,14 @@ dsh plugin --profile web add ./dsh-token-usage
 - 卸载是移除插件挂载，并不是数据重置流程。若要减少本地残留，请先在轨迹历史中删除报告、将预算清零，再按 DSH 自身的 session/cache 保留策略处理 projection 数据。
 
 ```powershell
+# 用当初安装时的同一个 spec 移除
+dsh plugin --profile web remove @hello_wk/dsh-token-usage
+
+# 源码安装的则用
 dsh plugin --profile web remove dsh-token-usage
 ```
+
+> 若不确定当初安装用的 spec，查看 profile 目录 `package.json` 的 `dependencies` 与 `dsh.profile.bundles` 中实际记录的名字，再按该名字移除。
 
 卸载后重启 `dsh web` 并刷新页面；已有会话历史仍存在，但仪表盘和自定义分析入口需要重新安装此插件才能显示。
 
@@ -302,7 +327,7 @@ flowchart LR
 
 ## 🛠️ 开发
 
-本项目当前以 GitHub 源码插件形式分发，不发布到 npm。源码与 DSH checkout 并排放置，`tsdown.config.ts` 复用 DSH 的官方 Client bundle preset。
+**上游**以 GitHub 源码插件形式分发、不发布到 npm。**本二开仓库**在上游源码分发之外，另以 `@hello_wk/dsh-token-usage` 发布到 npm，两者内容可能不一致，请以本仓库当前 commit 为准。源码与 DSH checkout 并排放置，`tsdown.config.ts` 复用 DSH 的官方 Client bundle preset。
 
 开发命令依赖 DSH workspace 提供的 TypeScript、Vitest 和 tsdown；该私有源码包本身没有声明这些 `devDependencies`。若脱离 DSH workspace 开发，需要自行安装兼容版本后再运行：
 
@@ -335,15 +360,35 @@ npm run build
 <a id="贡献与社区"></a>
 ## 🤝 贡献与社区
 
+**本仓库是个人二开，不是原作者仓库。** 请按来源选择对应入口：
+
+| 问题来源 | 提到哪里 |
+| --- | --- |
+| 本二开新增/修改的部分 | [本仓库 Issues](https://github.com/yumimanji/dsh-token-usage/issues) |
+| 上游原有功能、原始设计问题 | [上游 Issues](https://github.com/LeemanCheung/dsh-token-usage/issues) |
+
+- [提交本仓库 Bug](https://github.com/yumimanji/dsh-token-usage/issues/new?template=bug_report.yml)
+- [提出本仓库功能建议](https://github.com/yumimanji/dsh-token-usage/issues/new?template=feature_request.yml)
+- [提交上游 Bug](https://github.com/LeemanCheung/dsh-token-usage/issues/new?template=bug_report.yml)
 - [贡献指南](CONTRIBUTING.md)：本地开发、测试、构建和 Pull Request 检查。
 - [安全政策](SECURITY.md)：私密报告疑似安全问题或数据边界问题。
 - [变更日志](CHANGELOG.md)：当前仓库历史中的可验证变更。
-- [提交 Bug](https://github.com/LeemanCheung/dsh-token-usage/issues/new?template=bug_report.yml)
-- [提出功能建议](https://github.com/LeemanCheung/dsh-token-usage/issues/new?template=feature_request.yml)
+
+<a id="二开说明"></a>
+## 🍴 二开说明
+
+- **来源**：fork 自 [LeemanCheung/dsh-token-usage](https://github.com/LeemanCheung/dsh-token-usage)（MIT）。
+- **定位**：个人二次开发与实验仓库，**不代表原作者，也不代表官方**。功能可用性、兼容性与支持均由本仓库自行承担。
+- **包名**：上游不发布 npm；本二开以 `@hello_wk/dsh-token-usage` 发布，因此**不要**用上游仓库名去 npm 搜索或安装。
+- **版本关系**：本仓库版本号沿用上游基线（当前 `0.5.0`），便于对照差异；本二开的新增改动见 [CHANGELOG.md](CHANGELOG.md)。
+- **内部标识保持不变**：`cordis.patch.yml` 的插件实例 `id`、RPC/schema 字符串（如 `dsh-token-usage/workbench-v2`）、`localStorage` 键与 DOM 事件名沿用上游值，以保证已持久化数据与 Host↔Client 协议兼容；它们**不是** npm 包名。仅 `package.json` 的 `name` 与 `cordis.patch.yml` 的模块 `name` 改为 `@hello_wk/dsh-token-usage`。
+- **上游同步**：`git fetch upstream && git merge upstream/main`（或 `git rebase upstream/main`）；解决冲突后重新运行 `npm test`、`npm run typecheck`、`npm run build`，并核对 `lib/` 产物后再发布。
 
 ## 📄 License
 
 [MIT](LICENSE) © LeemanCheung
+
+本二开同样以 MIT 许可分发，**原始版权归原作者 LeemanCheung 所有**；本仓库的修改部分由 [@yumimanji](https://github.com/yumimanji) 维护。MIT 允许 fork、修改与再发布，但要求保留原始版权与许可声明（见 [LICENSE](LICENSE)）。
 
 
 ## 本地用量工作台（0.5.0）
